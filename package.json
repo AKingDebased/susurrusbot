@@ -1,0 +1,17 @@
+{
+  "name": "susurrus",
+  "version": "1.0.0",
+  "description": "A custom Twitch Bot for ASMRileyR",
+  "main": "src",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --require dotenv/config ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "tmi.js": "^1.5.0"
+  }
+}
