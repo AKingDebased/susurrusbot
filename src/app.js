@@ -1,21 +1,16 @@
 import tmi from 'tmi.js';
 
-import { hello, swearJar, bang} from './commands.js';
+import { parseCommands } from './commands.js';
 
 const {
 	DB_HOST,
 	DB_USER,
 	DB_PASSWORD,
-	DB_NAME
+	DB_NAME,
+	BOT_COMMAND_SYMBOL
 } = process.env;
 
 console.log('susurrus initialized');
-console.log({
-	DB_HOST,
-	DB_USER,
-	DB_PASSWORD,
-	DB_NAME
-});
 
 // This is the one library we'll use 'require' for, specficially to maintain parity with the knex docs
 const knex = require('knex')({
@@ -26,13 +21,6 @@ const knex = require('knex')({
 	  password: DB_PASSWORD,
 	  database: DB_NAME,
 	}
-});
-
-knex.schema.createTable('users', table => { 
-	table.increments('id');
-	table.string('name');
-}).then(() => {
-	console.log('table created!');
 });
 
 const clientOptions = {
@@ -53,16 +41,13 @@ const client = new tmi.Client(clientOptions);
 client.connect().catch(console.error);
 
 client.on('message', (channel, userstate, message, self) => {
-    console.log({
-        userstate,
-    });
-
-    message = message.toLowerCase();
-
     if (self) return;
-    
-	if (message === '!hello') hello(client, channel, userstate)
+	
+	message = message.toLowerCase();
 
-        // client.deletemessage(channel, userstate.id).then(() => console.log('messaged deleted')).catch(err => console.log('problem deleting message', err));
-    // if (message === '!bang') bang(client, channel, userstate)
+	console.log('message first letter', message[0])
+	// Fundamentally, the bot should only pay attention if the message is prefaced with the bot command symbol (default '!')
+	if (message[0] !== BOT_COMMAND_SYMBOL) return;
+
+	parseCommands({ client, channel, userstate, message });
 });
