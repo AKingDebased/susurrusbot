@@ -23,8 +23,9 @@ const knex = require('knex')({
 	}
 });
 
+// TODO: Change chat color
 const clientOptions = {
-	options: { debug: true, messagesLogLevel: "info" },
+	options: { debug: true, messagesLogLevel: 'info' },
 	connection: {
 		reconnect: true,
 		secure: true
@@ -33,7 +34,7 @@ const clientOptions = {
 		username: 'susurrusbot',
 		password: `oauth:${process.env.OAUTH_TOKEN}`
 	},
-	channels: [ 'faithlessfew' ]
+	channels: [ process.env.CHANNEL ]
 }
 
 const client = new tmi.Client(clientOptions);
@@ -45,7 +46,6 @@ client.on('message', (channel, userstate, message, self) => {
 	
 	message = message.toLowerCase();
 
-	console.log('message first letter', message[0])
 	// Fundamentally, the bot should only pay attention if the message is prefaced with the bot command symbol (default '!')
 	if (message[0] !== BOT_COMMAND_SYMBOL) return;
 
