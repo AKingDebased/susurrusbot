@@ -1,4 +1,5 @@
 // TODO: A system to keep track of people's favorite triggers
+// TODO: Bit notifications
 import axios from 'axios';
 
 const commands = {
@@ -6,7 +7,9 @@ const commands = {
         client.say(channel, `/me smiles warmly at you. “Why hello there, ${userstate['display-name']}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`);
     },
     hello: ({ client, channel, userstate }) => {
-        switch (userstate['display-name']) {
+        console.log('incoming display name', userstate['display-name'].toLowerCase())
+
+        switch (userstate['display-name'].toLowerCase()) {
             case 'harbinger':
                 client.say(channel, `/me tweaks your nose playfully. "Hello there, harbinger. I hope you've been having fun with Valhalla. Let's see if you can stay awake this time, hm?"`);
                 return;
@@ -23,7 +26,7 @@ const commands = {
                 client.say(channel, `/me hums a few bar of "You'll Never Walk Alone" to herself. "It's lovely to see you, shaneshane. Hope Liverpool's playing well today!"`);
                 return;
             case 'mandyplayerone':
-                client.say(channel, `"mandyplayerone, moderator extraordinaire. I hear you've been enjoying some Phasmophobia recently. Hope you always remember to bring your smudge sticks!"`);
+                client.say(channel, `mandyplayerone, moderator extraordinaire. I hear you've been enjoying some Phasmophobia recently. Hope you always remember to bring your smudge sticks!"`);
                 return;
             case 'thatqueertheatrekid':
                 client.say(channel, `thatqueertheatrekid Why, hello there, Leia, my love. How are your studies? I sincerely hope you're taking a moment to relax and reflect on your accomplishments. You absolutely deserve it.`);
@@ -39,6 +42,7 @@ const commands = {
         return true;
     }, 
     so: ({ client, channel, userstate, userCommandArgs }) => {
+        // TODO: Argument should use "@[username]"
         if (userCommandArgs.length !== 1) {
             client.say(channel, `${userstate['display-name']} Sorry, my love, that was an invalid command! You can type "!so help" to get, well, help with this command.`);
 
