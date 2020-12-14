@@ -51,8 +51,10 @@ const commands = {
 
         const soUser = userCommandArgs[0];
 
+        if (soUser[0] === '@') soUser = soUser.slice(1)
+
         if (soUser === 'help') {
-            client.say(channel, `${userstate['display-name']} To give someone a shout out, type "!shoutout <username>". For example, "!shoutout faithlessfew"`);
+            client.say(channel, `${userstate['display-name']} To give someone a shout out, type "!shoutout @username". For example, "!shoutout @faithlessfew"`);
 
             return;
         }
