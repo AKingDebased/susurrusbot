@@ -41,7 +41,7 @@ const client = new tmi.Client(clientOptions);
 
 client.connect().catch(console.error);
 
-client.on('message', (channel, userstate, message, self) => {
+client.on('chat', (channel, userstate, message, self) => {
     if (self) return;
 	
 	message = message.toLowerCase();
@@ -50,4 +50,8 @@ client.on('message', (channel, userstate, message, self) => {
 	if (message[0] !== BOT_COMMAND_SYMBOL) return;
 
 	parseCommands({ client, channel, userstate, message });
+});
+
+client.on('raided', (channel, username, viewers) => {
+    client.say(channel, `${username} is raiding the rose garden with ${viewers} ${viewers > 1  ? 'guests' : 'guest'}! Welcome, my loves, to the rose garden!`);
 });

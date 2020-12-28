@@ -2,8 +2,16 @@
 // TODO: Bit notifications
 import axios from "axios";
 
+let birthdayWishes = 0;
+
 const commands = {
   susu: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
+    );
+  },
+  burp: ({ client, channel, userstate }) => {
     client.say(
       channel,
       `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
@@ -168,6 +176,15 @@ const commands = {
   },
   donbomb: ({ client, channel, userstate, userCommandArgs }) => {
     client.say(channel, `/me raises her notebook over her head, ducking beneath it. "Oh my! What’s that raining down? Oh, it seems it's just Zack, the GOAT himself, dropping subs! The infamous DonBomb! Let's hear a cheer for him!" asmrilRose`);
+  },
+  birthday: ({ client, channel, userstate }) => {
+    if (birthdayWishes) {
+      birthdayWishes++;
+      client.say(channel, `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's ${birthdayWishes} birthday wishes today!"`);
+    } else {
+      client.say(channel, `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's the first birthday wish today!"`);
+      birthdayWishes++;
+    }
   }
 };
 
