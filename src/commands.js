@@ -11,44 +11,80 @@ const commands = {
       `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
     );
   },
-  burp: ({ client, channel, userstate }) => {
+  playingwith: ({ client, channel, userstate }) => {
     client.say(
       channel,
-      `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
+      `Riley is playing with twitch.tv/MandyPlayerOne today. Make sure to head to Mandy's stream and share the love!`
     );
   },
   hello: ({ client, channel, userstate }) => {
-    console.log('incoming display name', userstate['display-name'].toLowerCase())
+    console.log(
+      "incoming display name",
+      userstate["display-name"].toLowerCase()
+    );
 
-    switch (userstate['display-name'].toLowerCase()) {
-        case 'harbinger':
-            client.say(channel, `/me tweaks your nose playfully. "Hello there, harbinger. I hope you've been having fun with Valhalla. Let's see if you can stay awake this time, hm?"`);
-            return;
-        case 'dondeenie':
-            client.say(channel, `/me gasps, clutching her notebook to her chest, her pen nearly falling from behind her ear. "Why, if it isn't the elusive dondeenie, himself! The pleasure's all mine. Please, come on in. I've heard the legends of your 'donbombs.'"`);
-            return;
-        case 'joydrop':
-            client.say(channel, `So good to have you here, joydrop. Esteemed member of the Council of Three. I hope you've taken the time to enjoy a spiked egg nog or two this holiday season!`);
-            return;
-        case 'lockdown1919':
-            client.say(channel, `Ah, if it isn't Locky D himself. I've heard you've been something of Christmas Angel this season, what with all the gifts you've given!`);
-            return;
-        case 'shaneshane':
-            client.say(channel, `/me hums a few bar of "You'll Never Walk Alone" to herself. "It's lovely to see you, shaneshane. Hope Liverpool's playing well today!"`);
-            return;
-        case 'mandyplayerone':
-            client.say(channel, `mandyplayerone, moderator extraordinaire. I see you've been enjoying some The Sims, Star Wars edition, recently. Hope you're having fun on the edge of the galaxy!"`);
-            return;
-        case 'thatqueertheatrekid':
-            client.say(channel, `thatqueertheatrekid Why, hello there, Leia, my love. How are your studies? I sincerely hope you're taking a moment to relax and reflect on your accomplishments. You absolutely deserve it.`);
-            return;
-        case 'kaycozycorner':
-            client.say(channel, `kaycozycorner How lovely it is to see you. I hope you're keeping cozy, and taking the time to enjoy some Christmas crafts! What have you been working on?`);
-            return;
-        default:
-            client.say(channel, `${userstate['display-name']} Hello to you too, my love!`);
-            return;
-      }
+    switch (userstate["display-name"].toLowerCase()) {
+      case "rileyrozez":
+        client.say(
+          channel,
+          `/me bows, deeply, dramatically, with a grand, sweeping, gesture of her arm. "rileyrozez, my lady commander. It is, as always, an honor to serve you and your community, both. How can I be of service today?"`
+        );
+        return;
+      case "harbinger":
+        client.say(
+          channel,
+          `/me tweaks your nose playfully. "Hello there, harbinger. I hope you've been having fun with Valhalla. Let's see if you can stay awake this time, hm?"`
+        );
+        return;
+      case "dondeenie":
+        client.say(
+          channel,
+          `Why, if it's isn't the esteemed pilot of the illustrious Don Bomber himself! It's looking to be quite the year, don't you agree, Zack?"`
+        );
+        return;
+      case "joydrop":
+        client.say(
+          channel,
+          `So good to have you here, joydrop. Esteemed member of the Council of Three. I hope you've taken the time to enjoy a spiked egg nog or two this holiday season!`
+        );
+        return;
+      case "lockdown1919":
+        client.say(
+          channel,
+          `Well, if it isn't Bengt! It's lovely to see you again, my love. Please pet those adorable pups of yours for me! `
+        );
+        return;
+      case "shaneshane":
+        client.say(
+          channel,
+          `/me looks up at you, playfully suspicious. "Yeah, yeah yeah, hello to you, too. I know you'll asleep in seconds."`
+        );
+        return;
+      case "mandyplayerone":
+        client.say(
+          channel,
+          `mandyplayerone Hello, my lovely mod! You've been animating away over there, I see. Rather frustrating, isn't it? I'm proud of you for learning new things!`
+        );
+        return;
+      case "thatqueertheatrekid":
+        client.say(
+          channel,
+          `thatqueertheatrekid Why, hello, my love! I hope you are taking some time to rest in this new year! You work much, much, much too hard.`
+        );
+        return;
+      case "kayscozycorner":
+        client.say(
+          channel,
+          `kayscozycorner Kay! I apologize it took me so long to talk to you. Even I get shy, after all. Are you working on any crafts in this new year?`
+        );
+        return;
+      default:
+        client.say(
+          channel,
+          `${userstate["display-name"]} Hello to you too, my love!`
+        );
+        return;
+    }
   },
   swearJar: ({ client, channel, userstate }) => {
     // console.log('swear jar!')
@@ -175,17 +211,26 @@ const commands = {
     );
   },
   donbomb: ({ client, channel, userstate, userCommandArgs }) => {
-    client.say(channel, `/me raises her notebook over her head, ducking beneath it. "Oh my! What’s that raining down? Oh, it seems it's just Zack, the GOAT himself, dropping subs! The infamous DonBomb! Let's hear a cheer for him!" asmrilRose`);
+    client.say(
+      channel,
+      `/me raises her notebook over her head, ducking beneath it. "Oh my! What’s that raining down? Oh, it seems it's just Zack, the GOAT himself, dropping subs! The infamous DonBomb! Let's hear a cheer for him!" asmrilRose`
+    );
   },
   birthday: ({ client, channel, userstate }) => {
     if (birthdayWishes) {
       birthdayWishes++;
-      client.say(channel, `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's ${birthdayWishes} birthday wishes today!"`);
+      client.say(
+        channel,
+        `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's ${birthdayWishes} birthday wishes today!"`
+      );
     } else {
-      client.say(channel, `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's the first birthday wish today!"`);
+      client.say(
+        channel,
+        `/me pulls out two party horns, and tosses one to ${userstate["display-name"]}. "Hear, hear! ${userstate["display-name"]} and I want to wish Riley the happiest of birthdays! That's the first birthday wish today!"`
+      );
       birthdayWishes++;
     }
-  }
+  },
 };
 
 const parseCommands = ({ client, channel, userstate, message }) => {
