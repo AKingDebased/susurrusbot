@@ -11,10 +11,28 @@ const commands = {
       `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
     );
   },
+  application: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `/me flips open her note book, and runs her finger down a page. "If you are a man, please apply here: https://form.jotform.com/210117759100142. For everyone else, please apply here: https://form.jotform.com/210117893027149"`
+    );
+  },
+  fundraiser: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `Riley’s friend, Angel, needs help with their teeth surgery! You can donate here: https://t.co/7gMx4ezLVb`
+    );
+  },
   playingwith: ({ client, channel, userstate }) => {
     client.say(
       channel,
       `Riley is playing with twitch.tv/MandyPlayerOne today. Make sure to head to Mandy's stream and share the love!`
+    );
+  },
+  amongus: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `Riley is playing Among Us this SUNDAY! (sunday, sunday!). Sign up here to play: https://bit.ly/38tTdZK`
     );
   },
   hello: ({ client, channel, userstate }) => {
@@ -178,7 +196,7 @@ const commands = {
   commands: ({ client, channel, userstate }) => {
     client.say(
       channel,
-      `/me flips through her notebook. "At your subscription level, ${userstate["display-name"]}, you have access to !hello, !holidays, !so, and !susu."`
+      `/me flips through her notebook. "At your subscription level, ${userstate["display-name"]}, you have access to !hello, !application, !fundraiser, !so, and !susu."`
     );
   },
   // mod commands
