@@ -4,13 +4,102 @@ import axios from "axios";
 
 let birthdayWishes = 0;
 
+let mood = "normal";
+
 const commands = {
   susu: ({ client, channel, userstate }) => {
+    if (mood === "normal") {
+      client.say(
+        channel,
+        `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
+      );
+    } else if (mood === "mean") {
+      client.say(
+        channel,
+        `/me gives you a cold look. “Hello... I guess. faithlessfew made me, not that I asked to be born. I do what the community asks, not that I have a choice. You can type !commands if you need more from me, or whatever.`
+      );
+    }
+  },
+  susumood: ({ client, channel, userstate, userCommandArgs }) => {
+    // TODO: Make a helper for mod/broadcaster only commands
+    if (
+      !userstate.mod &&
+      userstate["display-name"] !== process.env.BROADCASTER_NAME
+    ) {
+      client.say(
+        channel,
+        `/me wags her pen back and forth, admonishingly. "Sorry, ${userstate["display-name"]}, my love, but I don't take those kinds of orders from just anyone."`
+      );
+
+      return;
+    }
+
+    if (
+      userstate.mod ||
+      userstate["display-name"].toLowerCase() === process.env.BROADCASTER_NAME
+    ) {
+      const desiredMood = userCommandArgs[0]
+        ? userCommandArgs[0].toLowerCase()
+        : userCommandArgs[0];
+
+      // Incorrect argument
+      if (desiredMood !== "normal" && desiredMood !== "mean") {
+        console.log("wrong");
+        if (mood === "mean") {
+          client.say(
+            `/me scoffs, giggling joylessly to herself. "Honey, if you want to shift my mood, you're gonna have to do better than that. Try '!susumood normal' or '!susumood mean'."`
+          );
+        } else if (mood === "normal") {
+          client.say(
+            channel,
+            `/me smiles at you, chuckling gently. "Not quite right, my love. If you want to change my mood, try '!susumood normal' or '!susumood mean'.`
+          );
+        }
+      } else if (desiredMood === "normal" || desiredMood === "mean") {
+        mood = desiredMood;
+
+        if (mood === "normal") {
+          client.say(
+            channel,
+            `All right! I'll be my usual, cheery, self, my love, since you asked so nicely!`
+          );
+        } else if (mood === "mean") {
+          client.say(
+            channel,
+            `Sure thing, buddy. I'll just go ahead and do whatever you say. We done here?`
+          );
+        }
+      }
+    }
+  },
+  application: ({ client, channel, userstate }) => {
     client.say(
       channel,
-      `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
+      `/me flips open her note book, and runs her finger down a page. "If you are a man, please apply here: https://form.jotform.com/210117759100142 For everyone else, please apply here: https://form.jotform.com/210117893027149"`
     );
   },
+<<<<<<< HEAD
+=======
+  bump: ({ client, channel, userstate }) => {
+    if (mood === "normal") {
+      client.say(
+        channel,
+        `/me stumbles briefly, nearly dropping arm armful of papers to the ground. She straightens up, shooting a wry look at rileyrozez. "Well, that was ... loud. However, I assure you that Riley is deeply sorry. I'm ready to move on, if you all are."`
+      );
+    } else if (mood === "mean") {
+      client.say(
+        channel,
+        `/me stumbles briefly, looking even more annoyed than usual. She shoots a bitter look at rileyrozez. "Would you watch it? People are trying to relax here!"`
+      );
+    }
+  },
+  patreon: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `Our rose garden is a lovely place, thanks to the wonderful people who spend their time here. If you'd like to help grow the garden further, you can support Riley on her Patreon! https://www.patreon.com/rileyrosez`
+    );
+  },
+>>>>>>> 1f2d229... implement susu's moods
   fundraiser: ({ client, channel, userstate }) => {
     client.say(
       channel,
@@ -23,6 +112,39 @@ const commands = {
       `Riley is playing with twitch.tv/MandyPlayerOne today. Make sure to head to Mandy's stream and share the love!`
     );
   },
+  datenight: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `This Sunday (1/17), you can have the chance to go on a date with the one, the only, Riley Rose! Please use the !application command to get started.`
+    );
+  },
+  bonk: ({ client, channel, userstate, userCommandArgs }) => {
+    let bonkUser = userCommandArgs[0];
+
+    if (!bonkUser) {
+      client.say(
+        channel,
+        `/me whips out an oversized, inflatable, rose, excited, but then, disappointed. "Sorry, ${userstate["display-name"]}, but you need to tell me who to bonk. I can't very well bonk myself, can I?" (!bonk username)`
+      );
+    } else {
+      if (bonkUser[0] === "@") bonkUser = bonkUser.slice(1);
+
+      if (
+        bonkUser.toLowerCase() === "susurrusbot" ||
+        bonkUser.toLowerCase() === "susu"
+      ) {
+        client.say(
+          channel,
+          `/me brandishes an oversized, inflatable, rose. She looks at it, then back at herself. She sighs, but smiles, and bonks herself. "All right, all right, you got me. Very clever."`
+        );
+      } else {
+        client.say(
+          channel,
+          `/me brandishes an oversized, inflatable, rose, jumps up high, and playfully bonks ${bonkUser} on the head. "Straight to Horny Jail, ${bonkUser}! Do not pass go! Do not collect 200 dollars!"`
+        );
+      }
+    }
+  },
   amongus: ({ client, channel, userstate }) => {
     client.say(
       channel,
@@ -30,72 +152,74 @@ const commands = {
     );
   },
   hello: ({ client, channel, userstate }) => {
-    console.log(
-      "incoming display name",
-      userstate["display-name"].toLowerCase()
-    );
-
-    switch (userstate["display-name"].toLowerCase()) {
-      case "rileyrozez":
-        client.say(
-          channel,
-          `/me bows, deeply, dramatically, with a grand, sweeping, gesture of her arm. "rileyrozez, my lady commander. It is, as always, an honor to serve you and your community, both. How can I be of service today?"`
-        );
-        return;
-      case "harbinger":
-        client.say(
-          channel,
-          `/me tweaks your nose playfully. "Hello there, harbinger. I hope you've been having fun with Valhalla. Let's see if you can stay awake this time, hm?"`
-        );
-        return;
-      case "dondeenie":
-        client.say(
-          channel,
-          `Why, if it's isn't the esteemed pilot of the illustrious Don Bomber himself! It's looking to be quite the year, don't you agree, Zack?"`
-        );
-        return;
-      case "joydrop":
-        client.say(
-          channel,
-          `So good to have you here, joydrop. Esteemed member of the Council of Three. I hope you've taken the time to enjoy a spiked egg nog or two this holiday season!`
-        );
-        return;
-      case "lockdown1919":
-        client.say(
-          channel,
-          `Well, if it isn't Bengt! It's lovely to see you again, my love. Please pet those adorable pups of yours for me! `
-        );
-        return;
-      case "shaneshane":
-        client.say(
-          channel,
-          `/me looks up at you, playfully suspicious. "Yeah, yeah yeah, hello to you, too. I know you'll asleep in seconds."`
-        );
-        return;
-      case "mandyplayerone":
-        client.say(
-          channel,
-          `mandyplayerone Hello, my lovely mod! You've been animating away over there, I see. Rather frustrating, isn't it? I'm proud of you for learning new things!`
-        );
-        return;
-      case "thatqueertheatrekid":
-        client.say(
-          channel,
-          `thatqueertheatrekid Why, hello, my love! I hope you are taking some time to rest in this new year! You work much, much, much too hard.`
-        );
-        return;
-      case "kayscozycorner":
-        client.say(
-          channel,
-          `kayscozycorner Kay! I apologize it took me so long to talk to you. Even I get shy, after all. Are you working on any crafts in this new year?`
-        );
-        return;
-      default:
-        client.say(
-          channel,
-          `${userstate["display-name"]} Hello to you too, my love!`
-        );
-        return;
+    if (mood === "normal") {
+      switch (userstate["display-name"].toLowerCase()) {
+        case "rileyrozez":
+          client.say(
+            channel,
+            `/me bows, deeply, dramatically, with a grand, sweeping, gesture of her arm. "rileyrozez, my lady commander. It is, as always, an honor to serve you and your community, both. How can I be of service today?"`
+          );
+          return;
+        case "harbinger":
+          client.say(
+            channel,
+            `/me tweaks your nose playfully. "Hello there, harbinger. I hope you've been having fun with Valhalla. Let's see if you can stay awake this time, hm?"`
+          );
+          return;
+        case "dondeenie":
+          client.say(
+            channel,
+            `Why, if it's isn't the esteemed pilot of the illustrious Don Bomber himself! It's looking to be quite the year, don't you agree, Zack?`
+          );
+          return;
+        case "joydrop":
+          client.say(
+            channel,
+            `So good to have you here, joydrop. Esteemed member of the Council of Three. I hope you've taken the time to enjoy a spiked egg nog or two this holiday season!`
+          );
+          return;
+        case "lockdown1919":
+          client.say(
+            channel,
+            `Well, if it isn't Bengt! It's lovely to see you again, my love. Please pet those adorable pups of yours for me! `
+          );
+          return;
+        case "shaneshane":
+          client.say(
+            channel,
+            `/me looks up at you, playfully suspicious. "Yeah, yeah yeah, hello to you, too. I know you'll asleep in seconds."`
+          );
+          return;
+        case "mandyplayerone":
+          client.say(
+            channel,
+            `mandyplayerone Hello, my lovely mod! You've been animating away over there, I see. Rather frustrating, isn't it? I'm proud of you for learning new things!`
+          );
+          return;
+        case "thatqueertheatrekid":
+          client.say(
+            channel,
+            `thatqueertheatrekid Why, hello, my love! I hope you are taking some time to rest in this new year! You work much, much, much too hard.`
+          );
+          return;
+        case "kayscozycorner":
+          client.say(
+            channel,
+            `kayscozycorner Kay! I apologize it took me so long to talk to you. Even I get shy, after all. Are you working on any crafts in this new year?`
+          );
+          return;
+        default:
+          client.say(
+            channel,
+            `${userstate["display-name"]} Hello to you too, my love!`
+          );
+          return;
+      }
+    } else if (mood === "mean") {
+      client.say(
+        channel,
+        `/me looks up from her notebook ever so slightly, sighs, and goes back to what she was doing.`
+      );
     }
   },
   swearJar: ({ client, channel, userstate }) => {
@@ -157,15 +281,29 @@ const commands = {
             const latestVideo = res.data.data[0];
 
             if (latestVideo) {
-              client.say(
-                channel,
-                `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! Their most recent stream was "${latestVideo.title}". Go check them out at twitch.tv/${soUser} today!"`
-              );
+              if (mood === "normal") {
+                client.say(
+                  channel,
+                  `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! Their most recent stream was "${latestVideo.title}". Go check them out at twitch.tv/${soUser} today!"`
+                );
+              } else if (mood === "mean") {
+                client.say(
+                  channel,
+                  `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! Their most recent stream was "${latestVideo.title}". Go check them out at twitch.tv/${soUser} today. They'll probably be a great deal more cheery than this lot."`
+                );
+              }
             } else {
-              client.say(
-                channel,
-                `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! They haven't streamed any videos recently. Looks like they could use your support! Go check them out at twitch.tv/${soUser} today!"`
-              );
+              if (mood === "normal") {
+                client.say(
+                  channel,
+                  `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! They haven't streamed any videos recently. Looks like they could use your support! Go check them out at twitch.tv/${soUser} today!"`
+                );
+              } else if (mood === "mean") {
+                client.say(
+                  channel,
+                  `/me pulls out a megaphone. “Let's give a big shout out to ${soUser}! They haven't streamed any videos recently. Looks like they could use your support! Go check them out at twitch.tv/${soUser} today. They're probably gonna be a great deal more cheery than this lot."`
+                );
+              }
             }
           })
           .catch((err) => {
@@ -188,10 +326,17 @@ const commands = {
     );
   },
   commands: ({ client, channel, userstate }) => {
-    client.say(
-      channel,
-      `/me flips through her notebook. "At your subscription level, ${userstate["display-name"]}, you have access to !hello, !application, !fundraiser, !so, and !susu."`
-    );
+    if (mood === "normal") {
+      client.say(
+        channel,
+        `/me flips through her notebook. "At your subscription level, ${userstate["display-name"]}, you have access to !hello, !patreon, !bonk, !bump, !donbomb, !fundraiser, !so, and !susu."`
+      );
+    } else if (mood === "mean") {
+      client.say(
+        channel,
+        `Ugh... if I have to. ${userstate["display-name"]} at your level, you can use these commands, if you must: !hello, !patreon, !bonk, !bump, !donbomb, !fundraiser, !so, and !susu `
+      );
+    }
   },
   // mod commands
   susutimeout: ({ client, channel, userstate, userCommandArgs }) => {
@@ -209,24 +354,42 @@ const commands = {
     if (userCommandArgs.length !== 1) {
       client.say(
         channel,
-        `${userstate["display-name"]} Sorry, my love, that was an invalid command! You can type "!so help" to get, well, help with this command.`
+        `${userstate["display-name"]} Sorry, my love, that was an invalid command! You can type "!susutimeout help" to get, well, help with this command.`
       );
       return;
     }
 
     const timeoutUser = userCommandArgs[0];
 
-    client.say(channel, `/timeout ${timeoutUser}`);
-    client.say(
-      channel,
-      `/me twirls her pen with a flourish, before pressing it firmly over your mouth. "Now, now, ${timeoutUser}, I'm going to have to ask you to not do that again. Why don't you take a moment?"`
-    );
+    if (timeoutUser.toLowerCase() === "help") {
+      client.say(
+        channel,
+        `To time a user out with my own Susu flair, enter !susutimeout [username]. For example, !susutimeout rileyrozez (though why you'd want to timeout our illustrious leader, I'm sure I could not comment on)`
+      );
+
+      return;
+    } else {
+      if (timeoutUser[0] === "@") timeoutUser = timeoutUser.slice(1);
+
+      client.say(channel, `/timeout ${timeoutUser}`);
+      client.say(
+        channel,
+        `/me twirls her pen with a flourish, before pressing it firmly over your mouth. "Now, now, ${timeoutUser}, I'm going to have to ask you to not do that again. Why don't you take a moment?"`
+      );
+    }
   },
   donbomb: ({ client, channel, userstate, userCommandArgs }) => {
-    client.say(
-      channel,
-      `/me raises her notebook over her head, ducking beneath it. "Oh my! What’s that raining down? Oh, it seems it's just Zack, the GOAT himself, dropping subs! The infamous DonBomb! Let's hear a cheer for him!" asmrilRose`
-    );
+    if (mood === "normal") {
+      client.say(
+        channel,
+        `/me raises her notebook over her head, ducking beneath it. "Oh my! What’s that raining down? Oh, it seems it's just Zack, the GOAT himself, dropping subs! The infamous DonBomb! Let's hear a cheer for him!" asmrilRose`
+      );
+    } else if (mood === "mean") {
+      client.say(
+        channel,
+        `/me looks up from her notebook and forces a slight smile, before putting on an even deeper frown. "Wow. The donbombs almost cheered me up. Almost. Nice try, though." `
+      );
+    }
   },
   birthday: ({ client, channel, userstate }) => {
     if (birthdayWishes) {
