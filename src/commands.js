@@ -11,12 +11,6 @@ const commands = {
       `/me smiles warmly at you. “Why hello there, ${userstate["display-name"]}, my love. I'm Susu! I was created by faithlessfew to be Rileyrozez's assistant, and a friend to her community. There's a great many things I can help you with. Why don't you type !commands to get started?”`
     );
   },
-  application: ({ client, channel, userstate }) => {
-    client.say(
-      channel,
-      `/me flips open her note book, and runs her finger down a page. "If you are a man, please apply here: https://form.jotform.com/210117759100142. For everyone else, please apply here: https://form.jotform.com/210117893027149"`
-    );
-  },
   fundraiser: ({ client, channel, userstate }) => {
     client.say(
       channel,
