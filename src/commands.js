@@ -1,10 +1,13 @@
 // TODO: A system to keep track of people's favorite triggers
 // TODO: Bit notifications
 import axios from "axios";
+import reduce from "lodash.reduce";
 
 let birthdayWishes = 0;
 
 let mood = "normal";
+
+let giveawayEntries = {};
 
 const commands = {
   susu: ({ client, channel, userstate }) => {
@@ -78,8 +81,6 @@ const commands = {
       `/me flips open her note book, and runs her finger down a page. "If you are a man, please apply here: https://form.jotform.com/210117759100142 For everyone else, please apply here: https://form.jotform.com/210117893027149"`
     );
   },
-<<<<<<< HEAD
-=======
   bump: ({ client, channel, userstate }) => {
     if (mood === "normal") {
       client.say(
@@ -99,7 +100,6 @@ const commands = {
       `Our rose garden is a lovely place, thanks to the wonderful people who spend their time here. If you'd like to help grow the garden further, you can support Riley on her Patreon! https://www.patreon.com/rileyrosez`
     );
   },
->>>>>>> 1f2d229... implement susu's moods
   fundraiser: ({ client, channel, userstate }) => {
     client.say(
       channel,
@@ -222,11 +222,110 @@ const commands = {
       );
     }
   },
+  lotuslashes: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `/me holds up a sign that says "#sponsored." "Do you like Riley's lashes? Want to get some of your own? Check out Lotus Lashes, and don't forget to use the code RILEYROSE for 20% off!"`
+    );
+  },
   swearJar: ({ client, channel, userstate }) => {
     // console.log('swear jar!')
     // client.say()
 
     return true;
+  },
+  giveaway: ({ client, channel, userstate, userCommandArgs }) => {
+    if (!userCommandArgs.length) {
+      client.say(
+        channel,
+        `Welcome to stream! Riley will be doing two Mario Kart giveaways on 1/26 (today), as well as a BIG giveaway for a Blue Yeti Microphone (date TBA)!`
+      );
+    }
+
+    if (userCommandArgs[0] === "enter") {
+      const entrantName = userstate["display-name"];
+      const isSubscribed = userstate["subscriber"];
+
+      // If there's no record of the entrant
+      if (!giveawayEntries.hasOwnProperty(entrantName)) {
+        if (isSubscribed) {
+          client.say(
+            channel,
+            `${entrantName} Hey, thank you for being a subscriber! As a reward, you've been entered twice (2) into today's giveaway!`
+          );
+
+          giveawayEntries[entrantName] = 2;
+        } else {
+          client.say(
+            channel,
+            `${entrantName} You've been entered once (1) in today's giveaway! If you subscribe to the channel, then type !giveaway enter again, you will be entered a second (2) time into today's giveaway! (That will be a total of two (2) entries)`
+          );
+
+          giveawayEntries[entrantName] = 1;
+        }
+      } else if (giveawayEntries.hasOwnProperty(entrantName)) {
+        // If the user has already entered
+        const entryAmount = giveawayEntries[entrantName];
+
+        if (entryAmount === 1 && !isSubscribed) {
+          client.say(
+            channel,
+            `${entrantName} I appreciate your enthusiasm, but you already have one (1) entry in today's giveaway. If you want to be entered a second (2) time, subscribe to the channel, then type "!giveaway enter" again!`
+          );
+        } else if (entryAmount === 1 && isSubscribed) {
+          client.say(
+            channel,
+            `${entrantName} Hey, thanks so much for subscribing! As a token of our gratitude, you now have two (2) entries in today's giveaway.`
+          );
+
+          giveawayEntries[entrantName] = 2;
+        } else if (entryAmount === 2 && isSubscribed) {
+          client.say(
+            channel,
+            `${entrantName} Thanks for participating in today's giveaway! Since you're a subscriber, you already have two (2) entries. That's the most you can have! You're doing great!`
+          );
+        }
+      }
+    }
+
+    // Broadcaster only arguments
+    if (
+      userstate["display-name"] === process.env.BROADCASTER_NAME ||
+      userstate["display-name"] === "faithlessfew"
+    ) {
+      if (userCommandArgs[0] === "winner") {
+        const reducedEntries = reduce(
+          giveawayEntries,
+          (accum, val, key) => {
+            for (let i = 0; i < val; i++) {
+              accum.push(key);
+            }
+
+            return accum;
+          },
+          []
+        );
+
+        const winner =
+          reducedEntries[Math.floor(Math.random() * reducedEntries.length)];
+
+        client.say(
+          channel,
+          `Thank you all for your entries, but the giveaway is now closed! I now will announce the winner! Drum roll please...`
+        );
+        client.say(
+          channel,
+          `${winner} You are today's giveaway winner! Congratulations!`
+        );
+      } else if (userCommandArgs[0] === "reset") {
+        giveawayEntries = {};
+
+        client.say(
+          channel,
+          `/me salutes rileyrozez with enthusiasm. "Aye, aye, captain. My giveaway memory has been reset!"`
+        );
+      }
+    }
   },
   so: ({ client, channel, userstate, userCommandArgs }) => {
     // TODO: Argument should use "@[username]"
