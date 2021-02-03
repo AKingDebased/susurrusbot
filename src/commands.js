@@ -169,7 +169,7 @@ const commands = {
         case "dondeenie":
           client.say(
             channel,
-            `Why, if it's isn't the esteemed pilot of the illustrious Don Bomber himself! It's looking to be quite the year, don't you agree, Zack?`
+            `@dondeenie Zack! So good to have you here. Knowing you, I hope you've been keeping close eye on, let's see here [squints at her note book] The Stonks. Make sure you [squints again at her notebook] keep holding so you can get those ... tendies??? I'm just reading what was written, I swear.`
           );
           return;
         case "joydrop":
@@ -181,19 +181,29 @@ const commands = {
         case "lockdown1919":
           client.say(
             channel,
-            `Well, if it isn't Bengt! It's lovely to see you again, my love. Please pet those adorable pups of yours for me! `
+            `@lockdown1919 Hey there, lockdown! Thank you for helping Riley stay organized. You and I both know she needs the help!`
           );
           return;
         case "shaneshane":
+          // client.say(
+          //   channel,
+          //   `/me looks up at you, playfully suspicious. "Yeah, yeah yeah, hello to you, too. I know you'll asleep in seconds."`
+          // );
           client.say(
             channel,
-            `/me looks up at you, playfully suspicious. "Yeah, yeah yeah, hello to you, too. I know you'll asleep in seconds."`
+            `@shaneshane It's Shane, Shane, Shane! Number one, if you ask me... [she leans in conspiratorially] But don't tell SPS that. I'm just hoping he's asleep! `
+          );
+          return;
+        case "itsps":
+          client.say(
+            channel,
+            `/me looks up from her notebook and laughs "Shane, I'm delighted to see you, my love, but I am concerned that you're going to have fallen asleep by the time I can finish this sentence."`
           );
           return;
         case "mandyplayerone":
           client.say(
             channel,
-            `mandyplayerone Hello, my lovely mod! You've been animating away over there, I see. Rather frustrating, isn't it? I'm proud of you for learning new things!`
+            `@mandyplayerone Hello, my beautiful love! How are streams going lately? Are you taking care of yourself? I just want to make sure you are nourishing that big brain of yours!`
           );
           return;
         case "thatqueertheatrekid":
@@ -205,13 +215,19 @@ const commands = {
         case "kayscozycorner":
           client.say(
             channel,
-            `kayscozycorner Kay! I apologize it took me so long to talk to you. Even I get shy, after all. Are you working on any crafts in this new year?`
+            `@kayscozycorner Why, hello, you little mathematician. I heard statistics was giving you a bit of trouble, but I believe in you! Keep at it.`
+          );
+          return;
+        case "hotboxfort":
+          client.say(
+            channel,
+            `@hotboxfort Hello Bee! Our newest mod extraordinaire. So glad to have you and your little Bean here on the mod squad.`
           );
           return;
         default:
           client.say(
             channel,
-            `${userstate["display-name"]} Hello to you too, my love!`
+            `${userstate["display-name"]} [she waves at you, cheerily] Hello to you too, my love!`
           );
           return;
       }
