@@ -370,7 +370,7 @@ const commands = {
     axios
       .get(`${process.env.TWITCH_API_URL}/users`, {
         headers: {
-          Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
+          Authorization: `Bearer ${process.env.USER_OAUTH_TOKEN}`,
           "Client-Id": process.env.CLIENT_ID,
         },
         params: {
@@ -383,7 +383,7 @@ const commands = {
         axios
           .get(`${process.env.TWITCH_API_URL}/videos`, {
             headers: {
-              Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
+              Authorization: `Bearer ${process.env.USER_OAUTH_TOKEN}`,
               "Client-Id": process.env.CLIENT_ID,
             },
             params: {

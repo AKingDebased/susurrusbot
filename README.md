@@ -2,9 +2,31 @@
 
 `npm start` will spin up a server on your machine. the bot will immediately be avaible in [faithlessfew's twitch chat](https://www.twitch.tv/faithlessfew).
 
+## authenticating
+
+from what i can tell so far, this process is a little silly. to get a user scoped oauth token, you have to send a `GET` request in the following format:
+
+```
+GET https://id.twitch.tv/oauth2/authorize
+    ?client_id=<your client ID>
+    &redirect_uri=<your registered redirect URI>
+    &response_type=code
+    &scope=<space-separated list of scopes>
+```
+
+- for security, `client_id` will not be specified here, but can be found in the twitch developer account associated with this bot
+- `redirect_uri=http://localhost/`
+- `response_type=token`
+- `scope=channel:moderate+chat:edit+chat:read`
+
+however, as far as i can tell, this request will open a browser window that must be interacted with. so, this token cannot be (easily) retrieved progamatically. might merit future investigation.
+
+the authentication docs can be found [here](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow)
+
 ## deloying
 
-- tbd
+- simply, `npm start`, and an instance of the bot will spin up. note that the bot is not a singleton, so another bot will be spun up for each `npm` process (could be interesting if ever there was a need to have multiple concurrent bots)
+- right now, susu lives in an AWS lightsail instance (as detailed below). one day, i'll make a fun little flow that allows an end user to enable & disable susu from a friendly web interface. today is not that day.
 
 ## connecting (local SSH)
 
