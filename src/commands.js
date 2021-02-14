@@ -151,6 +151,12 @@ const commands = {
       `Riley is playing Among Us this SUNDAY! (sunday, sunday!). Sign up here to play: https://bit.ly/38tTdZK`
     );
   },
+  valentine: ({ client, channel, userstate }) => {
+    client.say(
+      channel,
+      `/me descends from the rafters, wearing costume wings and a halo, and wielding a heart shaped bow playfully. "It's not too late to get a Valentine from Riley! All February Tips/Donations and any new Patreons will get sent a handmade Valentine. Sign up here, today: https://www.patreon.com/rileyrosez"`
+    );
+  },
   hello: ({ client, channel, userstate }) => {
     if (mood === "normal") {
       switch (userstate["display-name"].toLowerCase()) {
