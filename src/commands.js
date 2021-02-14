@@ -169,7 +169,7 @@ const commands = {
         case "dondeenie":
           client.say(
             channel,
-            `@dondeenie Zack! So good to have you here. Knowing you, I hope you've been keeping close eye on, let's see here [squints at her note book] The Stonks. Make sure you [squints again at her notebook] keep holding so you can get those ... tendies??? I'm just reading what was written, I swear.`
+            `@dondeenie Well, well, well, if it isn't our collective stream valentine, Mr. Don Deenie! Happy Valentines Day, Zack, my love.`
           );
           return;
         case "joydrop":
@@ -181,7 +181,7 @@ const commands = {
         case "lockdown1919":
           client.say(
             channel,
-            `@lockdown1919 Hey there, lockdown! Thank you for helping Riley stay organized. You and I both know she needs the help!`
+            `@lockdown1919 Happy Valentine's Day, my Sunflower! I hope you'll be spoiled fiercely by a loved one tonight. You deserve it. Thanks for spending time with us, and Riley, anyway!`
           );
           return;
         case "shaneshane":
@@ -194,34 +194,52 @@ const commands = {
             `@shaneshane It's Shane, Shane, Shane! Number one, if you ask me... [she leans in conspiratorially] But don't tell SPS that. I'm just hoping he's asleep! `
           );
           return;
-        case "itsps":
+        case "itssps":
           client.say(
             channel,
-            `/me looks up from her notebook and laughs "Shane, I'm delighted to see you, my love, but I am concerned that you're going to have fallen asleep by the time I can finish this sentence."`
+            `@itssps Happy Valentine's day, my love! Don't worry, Riley won't care if you fall asleep today. You've been perfectly lovely to her this week.`
           );
           return;
         case "mandyplayerone":
           client.say(
             channel,
-            `@mandyplayerone Hello, my beautiful love! How are streams going lately? Are you taking care of yourself? I just want to make sure you are nourishing that big brain of yours!`
+            `@mandyplayerone Oh, hello, beautiful lady! I've been meaning to ask for awhile now... would you be my valentine? I'll have to fight Riley for you, of course, but I think I'm up to the challenge!`
           );
           return;
         case "thatqueertheatrekid":
           client.say(
             channel,
-            `thatqueertheatrekid Why, hello, my love! I hope you are taking some time to rest in this new year! You work much, much, much too hard.`
+            `@thatqueertheatrekid Leia, Leia, Leia. Welcome to stream, my love, and a happy Valentine's Day to you. Riley has barred me from saying anymore because you are a small child, but we love you so much here! `
           );
           return;
         case "kayscozycorner":
           client.say(
             channel,
-            `@kayscozycorner Why, hello, you little mathematician. I heard statistics was giving you a bit of trouble, but I believe in you! Keep at it.`
+            `@kayscozycorner Oh, my creative cutie, happy Valentine's Day! Did you make anything for anyone special? Perhaps a bot on a channel you love, eh? [she coughs and points to herself, mischievously] .`
           );
           return;
         case "hotboxfort":
           client.say(
             channel,
-            `@hotboxfort Hello Bee! Our newest mod extraordinaire. So glad to have you and your little Bean here on the mod squad.`
+            `@hotboxfort Bee! A pleasure to see you here. I don't think I could fight Riley off for your hand as my valentine, so I'll just stick to kitty cuddle with Bean instead. Happy Valentine's Day! `
+          );
+          return;
+        case "theslimshadyest":
+          client.say(
+            channel,
+            `@theslimshadyest Oh yes, he's her,e and he's standing up! The Real Slim Shady, a real joy in our hearts, welcome to stream today. It's lovely to see you! How is everything going? Are you feeling relaxed, my love?`
+          );
+          return;
+        case "rageeaholic":
+          client.say(
+            channel,
+            `@rageeaholic HEY RAGE! [she clears her throat, collecting herself] Sorry, just trying to live under your influence! What games are you playing and raging at lately, my dear?`
+          );
+          return;
+        case "justmeatball":
+          client.say(
+            channel,
+            `@justmeatball My beloved Smushball and everyone's favorite spaghetti topping, it's so nice to see you. What are you playing tonight? Or, perhaps, you're just relaxing?`
           );
           return;
         default:
